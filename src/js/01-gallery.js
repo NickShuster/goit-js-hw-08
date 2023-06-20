@@ -1,7 +1,6 @@
-
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import { galleryItems } from './gallery-items.js';
-
-console.log(galleryItems);
 
 const gallery = document.querySelector('.gallery');
 
@@ -36,10 +35,18 @@ gallery.addEventListener('click', (event) => {
   if (event.target.classList.contains('gallery__image')) {
     const largeImageUrl = event.target.dataset.source;
 
-    const instance = basicLightbox.create(`
-      <img src="${largeImageUrl}" alt="" />
-    `);
+    const lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+      captionPosition: 'bottom',
+      overlay: true,
+      animationSpeed: 250,
+      fadeSpeed: 250,
+      closeText: '×',
+      swipeClose: true,
+      history: true,
+    });
 
-    instance.show();
+    lightbox.open({ startAt: galleryItems.findIndex(item => item.original === largeImageUrl) });
   }
 });
