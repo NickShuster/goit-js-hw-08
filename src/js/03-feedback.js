@@ -1,4 +1,3 @@
-
 import throttle from 'lodash.throttle';
 
 const feedbackForm = document.querySelector('.feedback-form');
@@ -7,6 +6,7 @@ const messageInput = feedbackForm.querySelector('textarea[name="message"]');
 const submitButton = feedbackForm.querySelector('button[type="submit"]');
 
 const feedbackFormStateKey = 'feedback-form-state';
+
 const saveFormStateToLocalStorage = () => {
   const formState = {
     email: emailInput.value,
@@ -44,6 +44,10 @@ const handleSubmit = (event) => {
       message: messageInput.value
     };
     console.log(formState);
+  }
+
+  if (!isEmailEmpty && !isMessageEmpty) {
+    clearLocalStorageAndForm();
   }
 };
 
